@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Место</title>
+  <link rel="stylesheet" href="./pages/index.css" />
+</head>
+
+<body class="page">
+  <header class="header">
+    <img class="header__logo" src="./images/header-logo.svg" alt="логотип Место">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <img class="profile__avatar" src="./images/profile.jpg" alt="фото">
+      <div class="profile__container">
+        <h1 class="profile__title">Жак-Ив Кусто</h1>
+        <button type="button" class="profile__edit-button"></button>
+        <p class="profile__subtitle">Исследователь океана</p>
+      </div>
+      <button type="button" class="profile__add-button"></button>
+    </section>
+    <section class="elements">
+      <ul class="elements__list">
+        <li class="elements__card">
+          <img class="elements__image" src="./images/karachaevsk.jpg" alt="Замок">
+          <div class="elements__description">
+            <h2 class="elements__title">Карачаевск</h2>
+            <button type="button" class="elements__like"></button>
+          </div>
+        </li>
+        <li class="elements__card">
+          <img class="elements__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
+          <div class="elements__description">
+            <h2 class="elements__title">Гора Эльбрус</h2>
+            <button type="button" class="elements__like"></button>
+          </div>
+        </li>
+        <li class="elements__card">
+          <img class="elements__image" src="./images/dombay.jpg" alt="Гора Домбай">
+          <div class="elements__description">
+            <h2 class="elements__title">Домбай</h2>
+            <button type="button" class="elements__like"></button>
+          </div>
+        </li>
+        <li class="elements__card">
+          <img class="elements__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
+          <div class="elements__description">
+            <h2 class="elements__title">Гора Эльбрус</h2>
+            <button type="button" class="elements__like"></button>
+          </div>
+        </li>
+        <li class="elements__card">
+          <img class="elements__image" src="./images/dombay.jpg" alt="Гора Домбай">
+          <div class="elements__description">
+            <h2 class="elements__title">Домбай</h2>
+            <button type="button" class="elements__like"></button>
+          </div>
+        </li>
+        <li class="elements__card">
+          <img class="elements__image" src="./images/karachaevsk.jpg" alt="Замок">
+          <div class="elements__description">
+            <h2 class="elements__title">Карачаево-Черкессия</h2>
+            <button type="button" class="elements__like"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyleft">&copy;2022 Mesto Russia</p>
+  </footer>
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button" aria-label="Выйти"></button>
+      <div class="popup__form">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form-info">
+          <input class="popup__item popup__item-username" type="text" value="Жак-Ив Кусто">
+          <input class="popup__item popup__item-about" type="text" value="Исследователь океана">
+          <button class="popup__submit-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="index.js" type="application/javascript"></script>
+</body>
+
+</html>

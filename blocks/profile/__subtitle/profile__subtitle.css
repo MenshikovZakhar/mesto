@@ -1,0 +1,25 @@
+.profile__subtitle {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: "Inter", "Arial ", sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  color: #FFFFFF;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__add-button {
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .profile__subtitle {
+    padding-bottom: 30px;
+    font-size: 14px;
+    line-height: 1.2;
+    text-align: center;
+  }
+}
+
