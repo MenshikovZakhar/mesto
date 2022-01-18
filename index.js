@@ -12,9 +12,9 @@ profileCloseButton.addEventListener('click', () => closePopup(editProfilePopup))
 formElement.addEventListener('submit', formSubmitHandler);
 
 function editProfile() {
-  openPopup(editProfilePopup);
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileJob.textContent;
+  openPopup(editProfilePopup);
 }
 function openPopup(popup) {
   popup.classList.add('popup_opened');
