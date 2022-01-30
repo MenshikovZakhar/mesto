@@ -33,6 +33,6 @@
 @import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__figure/popup__figure.css);
 @import url(../blocks/popup/__caption/popup__caption.css);
-@import url(../blocks/popup/__image/__image-opened/popup__image_opened.css);
+@import url(../blocks/popup/_image-opened/popup_image-opened.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyleft/footer__copyleft.css);
