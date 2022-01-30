@@ -13,6 +13,6 @@
   .profile__container {
     gap: 14px 10px;
     justify-content: center;
-    align-items:stretch;
+    align-items: stretch;
   }
 }
