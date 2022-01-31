@@ -30,18 +30,18 @@ const profileEditButton = document.querySelector(".profile__edit-button");
 const profileCloseButton = editProfilePopup.querySelector(".popup__close-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
-const formElement = document.querySelector(".popup__form-info");
+const profileForm = document.querySelector(".popup__form-info");
 const nameInput = document.querySelector(".popup__item-username");
 const jobInput = document.querySelector(".popup__item-about");
 profileEditButton.addEventListener("click", editProfile);
 profileCloseButton.addEventListener("click", () => closePopup(editProfilePopup));
-formElement.addEventListener("submit", formSubmitHandler);
+profileForm.addEventListener("submit", handleProfileFormSubmit);
 function editProfile() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(editProfilePopup);
 }
-function formSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
@@ -53,7 +53,7 @@ const cardContainer = document.querySelector(".elements__list");
 const standardCards = initialCards.map(function (card) {
   return createCard(card.name, card.link);
 });
-cardContainer.prepend(...standardCards);
+cardContainer.append(...standardCards);
 
 const addCardPopup = document.querySelector(".popup-card");
 const showAddCardPopup = document.querySelector(".profile__add-button");
@@ -71,7 +71,13 @@ function saveCardForm(evt) {
   evt.preventDefault();
   cardContainer.prepend(createCard(placeInput.value, linkInput.value));
   closePopup(addCardPopup);
+  clearCardForm();
 }
+function clearCardForm() {
+  placeInput.value = "";
+  linkInput.value = "";
+}
+
 
 const imagePopup = document.querySelector(".popup-image");
 const imageCloseButton = imagePopup.querySelector(".popup__close-button");
@@ -82,11 +88,11 @@ imageCloseButton.addEventListener("click", function () {
 });
 
 function createCard(placeValue, linkValue) {
-  let card = cardTemplate.querySelector(".elements__card").cloneNode(true);
-  let cardImage = card.querySelector(".elements__image");
-  let cardText = card.querySelector(".elements__title");
-  let cardLike = card.querySelector(".elements__like");
-  let cardRemove = card.querySelector(".elements__remove-button");
+  const card = cardTemplate.querySelector(".elements__card").cloneNode(true);
+  const cardImage = card.querySelector(".elements__image");
+  const cardText = card.querySelector(".elements__title");
+  const cardLike = card.querySelector(".elements__like");
+  const cardRemove = card.querySelector(".elements__remove-button");
   cardImage.src = linkValue;
   cardImage.alt = placeValue;
   cardText.textContent = placeValue;
