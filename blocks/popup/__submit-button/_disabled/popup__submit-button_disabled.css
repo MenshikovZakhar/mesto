@@ -4,7 +4,6 @@
   background: #fff;
   border: 1px solid #000;
   cursor: auto;
-  pointer-events: none;
 }
 
 .popup__submit-button_disabled:hover {

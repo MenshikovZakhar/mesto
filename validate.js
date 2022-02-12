@@ -1,6 +1,14 @@
+const config = {
+  formSelector: '.popup__forms',
+  inputSelector: '.popup__item',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__item_error',
+  errorClass: 'popup__input-error'
+};
+
 const showInputError = ((formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-
   inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(config.errorClass);
@@ -35,13 +43,20 @@ const setEventListeners = (formElement, config) => {
   });
 };
 
+const disableSubmitButton = (config, buttonElement) => {
+  buttonElement.classList.add(config.inactiveButtonClass);
+  buttonElement.disabled = true;
+}
+const enableSubmitButton = (config, buttonElement) => {
+  buttonElement.classList.remove(config.inactiveButtonClass);
+  buttonElement.disabled = false;
+}
+
 function setButtonState(formElement, buttonElement, config) {
   if (formElement.checkValidity()) {
-    buttonElement.classList.remove(config.inactiveButtonClass);
-    buttonElement.removeAttribute('disabled');
-
+    enableSubmitButton(config, buttonElement);
   } else {
-    buttonElement.classList.add(config.inactiveButtonClass);
+    disableSubmitButton(config, buttonElement);
   }
 }
 
@@ -64,3 +79,5 @@ enableValidation({
   inputErrorClass: 'popup__item_error',
   errorClass: 'popup__input-error'
 });
+
+
