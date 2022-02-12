@@ -85,6 +85,7 @@ const zoomedImagePopup = document.querySelector(".popup__image");
 const imageText = document.querySelector(".popup__caption");
 imageCloseButton.addEventListener("click", function () {
   closePopup(imagePopup);
+  clearCardForm();
 });
 
 function createCard(placeValue, linkValue) {
@@ -113,9 +114,28 @@ function createCard(placeValue, linkValue) {
   return card;
 }
 
+function handleEscForm(event) {
+  if (event.key === "Escape") {
+    const openedPopUp = document.querySelector(".popup_opened");
+    closePopup(openedPopUp);
+  }
+}
+function handleOverlayClickForm(event) {
+  if (event.target.classList.contains("popup")) {
+    const openedPopUp = document.querySelector(".popup_opened");
+    closePopup(openedPopUp);
+  }
+}
+
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keyup", handleEscForm);
+  document.addEventListener("click", handleOverlayClickForm);
+  clearCardForm();
 }
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keyup", handleEscForm);
+  document.removeEventListener("click", handleOverlayClickForm);
+  clearCardForm();
 }

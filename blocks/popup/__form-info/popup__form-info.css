@@ -1,13 +1,14 @@
 .popup__form-info {
   margin: 0 auto;
   border: none;
+  flex-direction: column;
+  display: flex;
 }
 
 @media (max-width: 767px) {
   .popup__form-info {
     width: 238px;
     padding: 0 22px 0 22px;
-    align-items: center;
     flex-direction: column;
     display: flex;
   }
