@@ -69,4 +69,14 @@ export class FormValidator {
   enableValidation() {
     this._setEventListeners();
   }
+
+  //Функция сброса ошибок
+  restartFormValidation() {
+    const inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
+    this._setButtonState(inputList);
+
+    inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+  }
 }

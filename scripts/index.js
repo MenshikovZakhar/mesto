@@ -62,6 +62,7 @@ function editProfile() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(editProfilePopup);
+  formEditProfileValidator.restartFormValidation();
 }
 
 //функция отправки формы для редактирования профиля
@@ -93,6 +94,7 @@ function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keyup", handleEscForm);
   document.addEventListener("click", handleOverlayClickForm);
+  clearCardForm();
 }
 
 //функция закрытия попапа
@@ -128,6 +130,7 @@ showAddCardPopup.addEventListener("click", function () {
   const buttonElement = formCard.querySelector('.popup__submit-button');
   buttonElement.classList.add(config.inactiveButtonClass);
   buttonElement.disabled = true;
+  formAddCardValidator.restartFormValidation();
 });
 
 //включение валидатора для каждой формы
