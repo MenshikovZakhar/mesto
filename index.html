@@ -45,7 +45,7 @@
       <button class="popup__close-button" type="button" aria-label="Выйти"></button>
       <div class="popup__form">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__forms popup__form-info" novalidate>
+        <form class="popup__forms popup__form-info" name="editProfile" novalidate>
           <input class="popup__item popup__item-username" type="text" value="" id="name-input" required minlength="2"
             maxlength="40">
           <span class="name-input-error popup__input-error"></span>
@@ -62,7 +62,7 @@
       <button class="popup__close-button" type="button" aria-label="Выйти"></button>
       <div class="popup__form">
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__forms popup__form-card" novalidate>
+        <form class="popup__forms popup__form-card" name="addCard" novalidate>
           <input class="popup__item popup__item-place" type="text" placeholder="Название" value="" id="place-input"
             required minlength="2" maxlength="30">
           <span class="place-input-error popup__input-error"></span>

@@ -2,6 +2,7 @@ export class FormValidator {
   constructor(config, formElement) {
     this._config = config;
     this._buttonElement = formElement.querySelector(config.submitButtonSelector);
+    this._inputList = Array.from(formElement.querySelectorAll(this._config.inputSelector));
     this._formElement = formElement;
   };
 
@@ -31,8 +32,8 @@ export class FormValidator {
   };
 
   //функция проверки ввода на корректность
-  _hasInvalidInput(inputList) {
-    return inputList.some(input => !input.validity.valid)
+  _hasInvalidInput() {
+    return this._inputList.some(input => !input.validity.valid)
   };
 
 
@@ -46,8 +47,8 @@ export class FormValidator {
   }
 
   //функция изменения состояния кнопки
-  _setButtonState(inputList) {
-    if (this._hasInvalidInput(inputList)) {
+  _setButtonState() {
+    if (this._hasInvalidInput()) {
       this._disableSubmitButton();
     } else {
       this._enableSubmitButton();
@@ -56,12 +57,10 @@ export class FormValidator {
 
   //функция добавления обработчиков полям формы
   _setEventListeners() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
-    this._setButtonState(inputList);
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._setButtonState(inputList);
+        this._setButtonState();
       });
     });
   };
@@ -72,11 +71,9 @@ export class FormValidator {
 
   //Функция сброса ошибок
   restartFormValidation() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
-    this._setButtonState(inputList);
-
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
+    this._setButtonState();
   }
 }
