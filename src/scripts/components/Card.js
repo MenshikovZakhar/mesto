@@ -8,15 +8,15 @@ export default class Card {
 
   // методом, который забирает разметку из HTML и клонируем элемент
   _getTemplate() {
-    const elementTemplate = document.querySelector(this._templateSelector).content;
-    const card = elementTemplate.querySelector(".elements__card").cloneNode(true);
-    return card;
+    this._elementTemplate = document.querySelector(this._templateSelector).content;
+    this._card = this._elementTemplate.querySelector(".elements__card").cloneNode(true);
+    return this._card;
   };
 
   //метод удаления карточек
-  _cardRemove(event) {
-    event.target.closest(".elements__card").remove();
-  };
+  _cardRemove = () => {
+    this._card.remove();;
+  }
 
   //метод лайка карточки
   _cardLike(event) {
