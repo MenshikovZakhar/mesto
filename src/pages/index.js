@@ -6,42 +6,86 @@ import Section from "../scripts/components/Section.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import UserInfo from "../scripts/components/UserInfo.js";
+import Api from "../scripts/components/Api.js";
+import PopupSubmit from "../scripts/components/PopupSubmit.js";
 import './index.css';
 
-const editProfilePopup = document.querySelector(".popup-profile");
+
 const profileEditButton = document.querySelector(".profile__edit-button");
-const profileCloseButton = editProfilePopup.querySelector(".popup__close-button");
-const profileTitle = document.querySelector(".profile__title");
-const profileJob = document.querySelector(".profile__subtitle");
-const profileForm = document.querySelector(".popup__form-info");
 const nameInput = document.querySelector(".popup__item-username");
 const jobInput = document.querySelector(".popup__item-about");
-const addCardPopup = document.querySelector(".popup-card");
 const showAddCardPopup = document.querySelector(".profile__add-button");
-const cardCloseButton = addCardPopup.querySelector(".popup__close-button");
 const formCard = document.querySelector(".popup__form-card");
-const placeInput = document.querySelector(".popup__item-place");
-const linkInput = document.querySelector(".popup__item-link");
-const imagePopup = document.querySelector(".popup-image");
-const imageCloseButton = imagePopup.querySelector(".popup__close-button");
-const cardContainer = document.querySelector(".elements__list");
-const zoomedImagePopup = document.querySelector(".popup__image");
-const imageText = document.querySelector(".popup__caption");
+const editButtonAvatar = document.querySelector(".profile__avatar-overlay");
+
+//подключение апи
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
+  headers: {
+    authorization: '7c23201b-b980-41a3-b675-2a551de25bb3',
+    'content-type': 'application/json'
+  }
+});
+
+//Загрузка с сервера информации о пользователе и карточек на страницу
+let userId
+api.getUserProfile()
+  .then(res => {
+    userInfo.setUserInfo(res);
+    userId = res._id
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+api.getInitialCards()
+  .then(cardArr => {
+    standardCards.renderItems(cardArr)
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
 
 //Инициализация попапа с картинкой
 const popupWithImage = new PopupWithImage(".popup-image");
 popupWithImage.setEventListeners();
 
-
-//функция создания новых карточек
+///функция создания новых карточек
 const renderercard = (item) => {
   const card = new Card(
     item.name,
     item.link,
+    item.likes,
+    item._id,
+    userId,
+    item.owner._id,
     ".card-template",
-    {
-      handleCardClick: () => {
-        popupWithImage.open(item.name, item.link);
+    () => { popupWithImage.open(item.name, item.link) },
+    (id) => {
+      popupDelCard.setSubmitAction(() => {
+        api.deleteCard(id)
+          .then(() => {
+            card.removeCard();
+            popupDelCard.close();
+          })
+          .catch(() => {
+            console.log("Ошибка удаления");
+          });
+      });
+      popupDelCard.open();
+    },
+    (id) => {
+      if (card.isLiked()) {
+        api.deleteLike(id)
+          .then(res => {
+            card.setLakes(res.likes)
+          })
+      } else {
+        api.addLike(id)
+          .then(res => {
+            card.setLakes(res.likes)
+          })
       }
     }
   );
@@ -52,22 +96,28 @@ const renderercard = (item) => {
 //отображение карточек
 const standardCards = new Section(
   {
-    data: initialCards,
     renderer: (item) => {
       standardCards.addItems(renderercard(item));
     }
   },
   ".elements__list"
 );
-standardCards.renderItems();
 
 //инициализация попапа карточек
 const popupCard = new PopupWithForm({
   popupSelector: ".popup-card",
   handleFormSubmit: (item) => {
-    formCard.reset();
-    standardCards.addItem(renderercard(item));
-    popupCard.close();
+    popupCard.setUserUX(true);
+    api.addNewCard(item)
+      .then((res) => {
+        const newCard = renderercard(res);
+        standardCards.addItem(newCard);
+        popupCard.close();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => popupCard.setUserUX(false));
   }
 });
 popupCard.setEventListeners();
@@ -79,20 +129,35 @@ showAddCardPopup.addEventListener("click", () => {
   popupCard.open();
 });
 
+// Инициализация попапа "Удаление карточки"
+const popupDelCard = new PopupSubmit({
+  popupSelector: ".popup-delete",
+});
+popupDelCard.setEventListeners();
+
 
 //Инициализация класса по добалению данных пользователя
 const userInfo = new UserInfo(
   ".profile__title",
   ".profile__subtitle",
+  ".profile__avatar",
 );
 
 //инициализация попапа профиля
 const popupProfile = new PopupWithForm({
   popupSelector: ".popup-profile",
   handleFormSubmit: (data) => {
-    userInfo.setUserInfo(data);
-    popupProfile.close();
-  }
+    popupProfile.setUserUX(true);
+    api.profileEdit(data)
+      .then((res) => {
+        userInfo.setUserInfo(res);
+        popupProfile.close();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => popupCard.setUserUX(false));
+  },
 });
 popupProfile.setEventListeners();
 
@@ -105,6 +170,27 @@ profileEditButton.addEventListener("click", () => {
   formValidators['editProfile'].restartFormValidation()
 });
 
+//инициализация попапа аватарки
+const popupAvatar = new PopupWithForm({
+  popupSelector: ".popup-avatar",
+  handleFormSubmit: (data) => {
+    api.editAvatar(data)
+      .then((res) => {
+        userInfo.setUserInfo(res);
+        popupAvatar.close();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+});
+popupAvatar.setEventListeners();
+
+//открытия попапа аватарки
+editButtonAvatar.addEventListener("click", () => {
+  popupAvatar.open();
+  formValidators['editProfile'].restartFormValidation()
+});
 
 const formValidators = {}
 //Включение валидации
