@@ -6,16 +6,40 @@ import Section from "../scripts/components/Section.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import UserInfo from "../scripts/components/UserInfo.js";
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
 import Api from "../scripts/components/Api.js";
 import PopupSubmit from "../scripts/components/PopupSubmit.js";
 import './index.css';
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+import './index.css';
+
+>>>>>>> d157c0c6f204d291065af2fc0548a04ac5f7b5e0
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
 const profileEditButton = document.querySelector(".profile__edit-button");
 const nameInput = document.querySelector(".popup__item-username");
 const jobInput = document.querySelector(".popup__item-about");
 const showAddCardPopup = document.querySelector(".profile__add-button");
 const formCard = document.querySelector(".popup__form-card");
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
 const editButtonAvatar = document.querySelector(".profile__avatar-overlay");
 
 //подключение апи
@@ -46,16 +70,43 @@ api.getInitialCards()
     console.log(error);
   });
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> d157c0c6f204d291065af2fc0548a04ac5f7b5e0
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
 
 //Инициализация попапа с картинкой
 const popupWithImage = new PopupWithImage(".popup-image");
 popupWithImage.setEventListeners();
 
+<<<<<<< HEAD
 ///функция создания новых карточек
+=======
+<<<<<<< HEAD
+///функция создания новых карточек
+=======
+<<<<<<< HEAD
+///функция создания новых карточек
+=======
+//функция создания новых карточек
+>>>>>>> d157c0c6f204d291065af2fc0548a04ac5f7b5e0
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
 const renderercard = (item) => {
   const card = new Card(
     item.name,
     item.link,
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
     item.likes,
     item._id,
     userId,
@@ -86,6 +137,18 @@ const renderercard = (item) => {
           .then(res => {
             card.setLakes(res.likes)
           })
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+    ".card-template",
+    {
+      handleCardClick: () => {
+        popupWithImage.open(item.name, item.link);
+>>>>>>> d157c0c6f204d291065af2fc0548a04ac5f7b5e0
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
       }
     }
   );
@@ -96,17 +159,44 @@ const renderercard = (item) => {
 //отображение карточек
 const standardCards = new Section(
   {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    data: initialCards,
+>>>>>>> d157c0c6f204d291065af2fc0548a04ac5f7b5e0
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
     renderer: (item) => {
       standardCards.addItems(renderercard(item));
     }
   },
   ".elements__list"
 );
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+standardCards.renderItems();
+>>>>>>> d157c0c6f204d291065af2fc0548a04ac5f7b5e0
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
 
 //инициализация попапа карточек
 const popupCard = new PopupWithForm({
   popupSelector: ".popup-card",
   handleFormSubmit: (item) => {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
     popupCard.setUserUX(true);
     api.addNewCard(item)
       .then((res) => {
@@ -118,6 +208,17 @@ const popupCard = new PopupWithForm({
         console.log(error);
       })
       .finally(() => popupCard.setUserUX(false));
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+    formCard.reset();
+    standardCards.addItem(renderercard(item));
+    popupCard.close();
+>>>>>>> d157c0c6f204d291065af2fc0548a04ac5f7b5e0
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
   }
 });
 popupCard.setEventListeners();
@@ -129,24 +230,57 @@ showAddCardPopup.addEventListener("click", () => {
   popupCard.open();
 });
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
 // Инициализация попапа "Удаление карточки"
 const popupDelCard = new PopupSubmit({
   popupSelector: ".popup-delete",
 });
 popupDelCard.setEventListeners();
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> d157c0c6f204d291065af2fc0548a04ac5f7b5e0
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
 
 //Инициализация класса по добалению данных пользователя
 const userInfo = new UserInfo(
   ".profile__title",
   ".profile__subtitle",
+<<<<<<< HEAD
   ".profile__avatar",
+=======
+<<<<<<< HEAD
+  ".profile__avatar",
+=======
+<<<<<<< HEAD
+  ".profile__avatar",
+=======
+>>>>>>> d157c0c6f204d291065af2fc0548a04ac5f7b5e0
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
 );
 
 //инициализация попапа профиля
 const popupProfile = new PopupWithForm({
   popupSelector: ".popup-profile",
   handleFormSubmit: (data) => {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
     popupProfile.setUserUX(true);
     api.profileEdit(data)
       .then((res) => {
@@ -158,6 +292,17 @@ const popupProfile = new PopupWithForm({
       })
       .finally(() => popupCard.setUserUX(false));
   },
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+    userInfo.setUserInfo(data);
+    popupProfile.close();
+  }
+>>>>>>> d157c0c6f204d291065af2fc0548a04ac5f7b5e0
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
 });
 popupProfile.setEventListeners();
 
@@ -170,6 +315,13 @@ profileEditButton.addEventListener("click", () => {
   formValidators['editProfile'].restartFormValidation()
 });
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
 //инициализация попапа аватарки
 const popupAvatar = new PopupWithForm({
   popupSelector: ".popup-avatar",
@@ -191,6 +343,14 @@ editButtonAvatar.addEventListener("click", () => {
   popupAvatar.open();
   formValidators['editProfile'].restartFormValidation()
 });
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> d157c0c6f204d291065af2fc0548a04ac5f7b5e0
+>>>>>>> 5fdf863e8f3356e6fbd6ffba85122907ce5024c4
+>>>>>>> 9d2c36d2b3402d7cdaea04c5902f021e5dbedba3
 
 const formValidators = {}
 //Включение валидации
