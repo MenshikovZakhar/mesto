@@ -13,7 +13,10 @@
   </header>
   <main class="content">
     <section class="profile">
-      <img class="profile__avatar" src='<%=require("./images/profile.jpg")%>' alt="фото">
+      <div class="profile__avatar-wrap">
+        <div class="profile__avatar-overlay"></div>
+        <img class="profile__avatar" src='<%=require("./images/profile.jpg")%>' alt="фото">
+      </div>
       <div class="profile__container">
         <h1 class="profile__title">Жак-Ив Кусто</h1>
         <button type="button" class="profile__edit-button" aria-label="Редактировать"></button>
@@ -28,7 +31,10 @@
             <img class="elements__image" src="./images/karachaevsk.jpg" alt="Замок">
             <div class="elements__description">
               <h2 class="elements__title">Карачаевск</h2>
-              <button type="button" class="elements__like" aria-label="Нравиться"></button>
+              <div class="element__like_ui">
+                <button type="button" class="elements__like" aria-label="Нравиться"></button>
+                <p class="element__like-counter"></p>
+              </div>
             </div>
             <button type="button" class="elements__remove-button"></button>
           </li>
@@ -39,7 +45,7 @@
   <footer class="footer">
     <p class="footer__copyleft">&copy;2022 Mesto Russia</p>
   </footer>
-  <div class="popup popup-profile">
+  <section class="popup popup-profile">
     <div class="popup__container">
       <button class="popup__close-button" type="button" aria-label="Выйти"></button>
       <div class="popup__form">
@@ -55,8 +61,8 @@
         </form>
       </div>
     </div>
-  </div>
-  <div class="popup popup-card">
+  </section>
+  <section class="popup popup-card">
     <div class="popup__container">
       <button class="popup__close-button" type="button" aria-label="Выйти"></button>
       <div class="popup__form">
@@ -72,8 +78,9 @@
         </form>
       </div>
     </div>
-  </div>
-  <div class="popup popup-image popup_image-opened">
+  </section>
+
+  <section class="popup popup-image popup_image-opened">
     <div class="popup__figure-container">
       <figure class="popup__figure">
         <img class="popup__image" src="#" alt="#">
@@ -81,7 +88,32 @@
       </figure>
       <button class="popup__close-button" type="button" aria-label="Выйти"></button>
     </div>
-  </div>
+  </section>
+
+  <section class="popup popup-delete">
+    <div class="popup__container">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form class="popup__form">
+        <button class="popup__submit-button" type="submit">Да</button>
+      </form>
+      <button class="popup__close-button" type="button"></button>
+    </div>
+  </section>
+
+  <section class="popup popup-avatar">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button" aria-label="Выйти"></button>
+      <div class="popup__form">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__forms popup__form-avatar" name="popup-form-avatar" novalidate>
+          <input class="popup__item popup__item-place" name="avatar" placeholder="Ссылка на аватарку" value=""
+            id="input-link" type="url" required>
+          <span class="input-link-error popup__input-error"></span>
+          <button class="popup__submit-button popup__submit-button_disabled" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
 </body>
 
