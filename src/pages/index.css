@@ -40,5 +40,6 @@
 @import url(../blocks/popup/__item/_error/popup__item_error.css);
 @import url(../blocks/popup/__input-error/popup__input-error.css);
 @import url(../blocks/popup/__submit-button/_disabled/popup__submit-button_disabled.css);
+@import url(../blocks/popup/__form-avatar/popup__form-avatar.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyleft/footer__copyleft.css);
