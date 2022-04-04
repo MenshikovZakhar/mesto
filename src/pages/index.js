@@ -29,23 +29,17 @@ const api = new Api({
 
 //Загрузка с сервера информации о пользователе и карточек на страницу
 let userId
-api.getUserProfile()
-  .then(res => {
-    userInfo.setUserInfo(res);
-    userId = res._id
+Promise.all([api.getUserProfile(), api.getInitialCards()])
+  .then(([userData, cardArr]) => {
+    userInfo.setUserInfo(userData);
+    userId = userData._id
+    standardCards.renderItems(cardArr);
+    console.log(userData);
+    console.log(cardArr);
   })
   .catch((error) => {
     console.log(error);
   });
-
-api.getInitialCards()
-  .then(cardArr => {
-    standardCards.renderItems(cardArr)
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
 
 //Инициализация попапа с картинкой
 const popupWithImage = new PopupWithImage(".popup-image");
@@ -81,11 +75,17 @@ const renderercard = (item) => {
           .then(res => {
             card.setLakes(res.likes)
           })
+          .catch(() => {
+            console.log("Ошибка снятия лайка");
+          });
       } else {
         api.addLike(id)
           .then(res => {
             card.setLakes(res.likes)
           })
+          .catch(() => {
+            console.log("Ошибка постановки лайка");
+          });
       }
     }
   );
@@ -189,7 +189,7 @@ popupAvatar.setEventListeners();
 //открытия попапа аватарки
 editButtonAvatar.addEventListener("click", () => {
   popupAvatar.open();
-  formValidators['editProfile'].restartFormValidation()
+  formValidators['popup-form-avatar'].restartFormValidation()
 });
 
 const formValidators = {}
