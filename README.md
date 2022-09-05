@@ -23,7 +23,6 @@
 
 ## Как развернуть проект
 
-Клонируйте репозиторий:
-
-`git clone https://github.com/MenshikovZakhar/mesto.git`
+1. Клонируйте репозиторий:`git clone https://github.com/MenshikovZakhar/mesto.git`;
+2. Собрать проект с помощью  Webpack. 
 
